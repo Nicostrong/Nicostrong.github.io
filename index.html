@@ -1,222 +1,205 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Repositories & READMEs</title>
-    
-    <!-- Convertisseur Markdown vers HTML -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
-    <style>
-        :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --border-color: #30363d;
-            --text-color: #c9d1d9;
-            --text-heading: #f0f6fc;
-            --accent-color: #58a6ff;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mes Repositories & READMEs</title>
+	
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	
+	<style>
+		:root {
+			--bg-color: #0d1117;
+			--card-bg: #161b22;
+			--border-color: #30363d;
+			--text-color: #c9d1d9;
+			--text-heading: #f0f6fc;
+			--accent-color: #58a6ff;
+		}
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 2rem 1rem;
-            line-height: 1.6;
-        }
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+			background-color: var(--bg-color);
+			color: var(--text-color);
+			margin: 0;
+			padding: 2rem 1rem;
+			line-height: 1.6;
+		}
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+		.container {
+			max-width: 900px;
+			margin: 0 auto;
+		}
 
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+		header {
+			text-align: center;
+			margin-bottom: 3rem;
+		}
 
-        h1 {
-            color: var(--text-heading);
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
+		h1 {
+			color: var(--text-heading);
+			font-size: 2rem;
+			margin-bottom: 0.5rem;
+		}
 
-        .loader {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            margin: 2rem 0;
-        }
+		.loader {
+			text-align: center;
+			font-size: 1.2rem;
+			color: var(--accent-color);
+			margin: 2rem 0;
+		}
 
-        .repo-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-        }
+		.repo-card {
+			background-color: var(--card-bg);
+			border: 1px solid var(--border-color);
+			border-radius: 6px;
+			margin-bottom: 1.5rem;
+			padding: 1.5rem;
+		}
 
-        .repo-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
-        }
+		.repo-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			border-bottom: 1px solid var(--border-color);
+			padding-bottom: 1rem;
+			margin-bottom: 1rem;
+		}
 
-        .repo-title {
-            margin: 0;
-            font-size: 1.4rem;
-        }
+		.repo-title {
+			margin: 0;
+			font-size: 1.4rem;
+		}
 
-        .repo-title a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
+		.repo-title a {
+			color: var(--accent-color);
+			text-decoration: none;
+		}
 
-        .repo-title a:hover {
-            text-decoration: underline;
-        }
+		.repo-title a:hover {
+			text-decoration: underline;
+		}
 
-        details {
-            margin-top: 1rem;
-        }
+		details {
+			margin-top: 1rem;
+		}
 
-        summary {
-            cursor: pointer;
-            color: var(--accent-color);
-            font-weight: 600;
-            user-select: none;
-        }
+		summary {
+			cursor: pointer;
+			color: var(--accent-color);
+			font-weight: 600;
+			user-select: none;
+		}
 
-        /* Style pour le contenu Markdown du README */
-        .readme-content {
-            background-color: #0d1117;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            overflow-x: auto;
-        }
+		.readme-content {
+			background-color: #0d1117;
+			border: 1px solid var(--border-color);
+			border-radius: 6px;
+			padding: 1.5rem;
+			margin-top: 1rem;
+			overflow-x: auto;
+		}
 
-        .readme-content h1, .readme-content h2, .readme-content h3 {
-            color: var(--text-heading);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.3em;
-        }
+		.readme-content h1, .readme-content h2, .readme-content h3 {
+			color: var(--text-heading);
+			border-bottom: 1px solid var(--border-color);
+			padding-bottom: 0.3em;
+		}
 
-        .readme-content code {
-            background-color: rgba(110, 118, 129, 0.4);
-            padding: 0.2em 0.4em;
-            border-radius: 6px;
-            font-family: monospace;
-        }
+		.readme-content code {
+			background-color: rgba(110, 118, 129, 0.4);
+			padding: 0.2em 0.4em;
+			border-radius: 6px;
+			font-family: monospace;
+		}
 
-        .readme-content pre code {
-            display: block;
-            padding: 1em;
-            overflow-x: auto;
-        }
+		.readme-content pre code {
+			display: block;
+			padding: 1em;
+			overflow-x: auto;
+		}
 
-        .empty-readme {
-            font-style: italic;
-            color: #8b949e;
-        }
-    </style>
+		.empty-readme {
+			font-style: italic;
+			color: #8b949e;
+		}
+	</style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1 id="user-title">Projets GitHub</h1>
-            <p>Liste automatique de mes dépôts publics et de leurs documentations.</p>
-        </header>
+	<div class="container">
+		<header>
+			<h1 id="user-title">Projets GitHub</h1>
+			<p>Liste automatique de mes dépôts publics et de leurs documentations.</p>
+		</header>
 
-        <div id="loader" class="loader">Chargement des dépôts et des READMEs...</div>
-        <div id="repos-container"></div>
-    </div>
+		<div id="loader" class="loader">Chargement des dépôts et des READMEs...</div>
+		<div id="repos-container"></div>
+	</div>
 
-    <script>
-        const GITHUB_USERNAME = 'nicostrong';
+	<script>
+		const GITHUB_USERNAME = 'nicostrong';
+		document.getElementById('user-title').textContent = `Projets GitHub de ${GITHUB_USERNAME}`;
 
-        document.getElementById('user-title').textContent = `Projets GitHub de ${GITHUB_USERNAME}`;
+		async function fetchReposAndReadmes()
+		{
+			const container = document.getElementById('repos-container');
+			const loader = document.getElementById('loader');
 
-        async function fetchReposAndReadmes() {
-            const container = document.getElementById('repos-container');
-            const loader = document.getElementById('loader');
+			try
+			{
+				const response = await fetch('./data.json');
+				
+				if (!response.ok)
+					throw new Error(`Erreur lors du chargement des données (${response.status})`);
 
-            try {
-                const reposResponse = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
-                
-                if (!reposResponse.ok) {
-                    throw new Error(`Utilisateur introuvable ou limite d'API atteinte (${reposResponse.status})`);
-                }
+				const repos = await response.json();
 
-                const repos = await reposResponse.json();
-                loader.style.display = 'none';
+				loader.style.display = 'none';
 
-                if (repos.length === 0) {
-                    container.innerHTML = '<p>Aucun dépôt public trouvé.</p>';
-                    return;
-                }
+				if (repos.length === 0)
+				{
+					container.innerHTML = '<p>Aucun dépôt public trouvé.</p>';
+					return;
+				}
 
-                for (const repo of repos) {
-                    if (repo.fork) continue; // Ignore les projets forké (optionnel)
+				for (const repo of repos)
+				{
+					const card = document.createElement('div');
 
-                    const card = document.createElement('div');
-                    card.className = 'repo-card';
+					card.className = 'repo-card';
 
-                    const repoDescription = repo.description ? `<p>${repo.description}</p>` : '';
+					const repoDescription = repo.description ? `<p>${repo.description}</p>` : '';
+					
+					const readmeHTML = repo.readme ? marked.parse(repo.readme) : '<p class="empty-readme">Aucun fichier README.md trouvé pour ce dépôt.</p>';
 
-                    card.innerHTML = `
-                        <div class="repo-header">
-                            <h2 class="repo-title">
-                                <a href="${repo.html_url}" target="_blank" rel="noopener">${repo.name}</a>
-                            </h2>
-                            <span>⭐ ${repo.stargazers_count}</span>
-                        </div>
-                        ${repoDescription}
-                        <details open>
-                            <summary>Afficher l'explication (README)</summary>
-                            <div class="readme-content" id="readme-${repo.name}">
-                                <em>Chargement du README...</em>
-                            </div>
-                        </details>
-                    `;
+					card.innerHTML = `
+						<div class="repo-header">
+							<h2 class="repo-title">
+								<a href="${repo.url}" target="_blank" rel="noopener">${repo.name}</a>
+							</h2>
+							<span>⭐ ${repo.stargazers_count || 0}</span>
+						</div>
+						${repoDescription}
+						<details open>
+							<summary>Afficher l'explication (README)</summary>
+							<div class="readme-content">
+								${readmeHTML}
+							</div>
+						</details>
+					`;
 
-                    container.appendChild(card);
+					container.appendChild(card);
+				}
 
-                    loadReadme(repo.name);
-                }
+			}
+			catch (error)
+			{
+				loader.innerHTML = `<p style="color: #f85149;">Erreur : ${error.message}</p>`;
+			}
+		}
 
-            } catch (error) {
-                loader.innerHTML = `<p style="color: #f85149;">Erreur : ${error.message}</p>`;
-            }
-        }
-
-        async function loadReadme(repoName) {
-            const readmeContainer = document.getElementById(`readme-${repoName}`);
-            
-            try {
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/readme`, {
-                    headers: { 'Accept': 'application/vnd.github.raw+json' }
-                });
-
-                if (response.ok) {
-                    const markdownText = await response.text();
-                    readmeContainer.innerHTML = marked.parse(markdownText);
-                } else {
-                    readmeContainer.innerHTML = '<p class="empty-readme">Aucun fichier README.md trouvé pour ce dépôt.</p>';
-                }
-            } catch (err) {
-                readmeContainer.innerHTML = '<p class="empty-readme">Impossible de charger le README.</p>';
-            }
-        }
-
-        fetchReposAndReadmes();
-    </script>
+		fetchReposAndReadmes();
+	</script>
 </body>
 </html>

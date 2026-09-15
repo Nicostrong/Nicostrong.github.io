@@ -35,6 +35,7 @@ async function build()
             name: repo.name,
             url: repo.html_url,
             description: repo.description,
+            stargazers_count: repo.stargazers_count,
             readme: readmeContent
         });
     }

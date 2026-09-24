@@ -5,6 +5,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+    schedule:
+      - cron: '0 6 * * *'
 
 permissions:
   contents: read
@@ -47,3 +49,27 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Send email notification
+        if: always()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+
+          subject: '[GitHub Actions] Déploiement Portfolio : ${{ job.status }}'
+
+          to: nicostrong@gmail.com
+
+          from: GitHub Actions Workflow
+
+          body: |
+            Le workflow de déploiement de votre portfolio s'est terminé avec le statut : ${{ job.status }}.
+
+            Détails de l'exécution :
+            Dépôt : ${{ github.repository }}
+            Lien vers les logs : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
